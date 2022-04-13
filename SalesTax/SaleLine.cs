@@ -21,6 +21,7 @@ namespace SalesTax
         public SaleLine(int lineQuantity, string name, decimal unitPrice, bool itemIsImported, TaxFreeProductRegistry registry = null)
         {
             int taxRate;
+
             if (string.IsNullOrEmpty(name)) name = string.Empty;
 
             Quantity = lineQuantity;
@@ -29,15 +30,18 @@ namespace SalesTax
             IsImported = itemIsImported;
             LineValue = Price * Quantity;
 
-            if (ProductName.Contains("book") || ProductName.Contains("tablet") || ProductName.Contains("tomatoes"))
+            if (ProductName.Contains("book") || ProductName.Contains("tablet") || ProductName.Contains("tomatoes") || ProductName.Contains("chips"))
                 taxRate = 0;  //No sales tax for books, medicals items or food
             else
                 taxRate = 10; //10% sales tax or general products
+
             if (IsImported)
-                taxRate = 5; //5% import tax
+                taxRate += 5; //5% import tax. Note: add general products tax rate too.
+
 
             var taxAmount = CalculateTax(LineValue,taxRate);
             LineValue += taxAmount;
+            Tax += taxAmount;
         }
 
         /// <summary>

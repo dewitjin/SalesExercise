@@ -25,10 +25,17 @@ namespace SalesTax
             SaleLine saleLine;
 
             var words = input.Split(' ');
+
+            var hasAtWord = words.Contains("at");
+            var indexOfAtWord = -1;
+            if (hasAtWord)
+            {
+                indexOfAtWord = Array.IndexOf(words, "at");
+            }
             var wordCount = words.Length;
 
             // must have at least 4 words
-            if (wordCount > 4)
+            if (wordCount < 4)
                 return null;
 
             // get quantity (first word)
@@ -59,9 +66,7 @@ namespace SalesTax
                 return null;
             }
 
-       
-
-            productName = string.Join(" ", words, 1, 1);
+            productName = string.Join(" ", words, 1, indexOfAtWord - 1);
 
             //Check if this is an imported product
             isImported = productName.Contains("imported ");
