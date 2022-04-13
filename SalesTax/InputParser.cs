@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace SalesTax
 {
@@ -58,7 +59,9 @@ namespace SalesTax
                 return null;
             }
 
-            productName = string.Join(" ", words, 1, wordCount);
+       
+
+            productName = string.Join(" ", words, 1, 1);
 
             //Check if this is an imported product
             isImported = productName.Contains("imported ");

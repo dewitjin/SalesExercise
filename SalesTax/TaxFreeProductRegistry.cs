@@ -16,10 +16,10 @@ namespace SalesTax
         //Add a product to the tax free registry
         public void Add(string itemName)
         {
-            throw new NotImplementedException();
+            productNames.Add(itemName);
         }
 
         //The number of products in the registry
-        public int Length { get { throw new NotImplementedException(); } }
+        public int Length { get { return productNames.Count; } }
     }
 }

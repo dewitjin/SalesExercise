@@ -6,7 +6,7 @@ namespace SalesTax
 {
     public class Sale
     {
-        private List<SaleLine> saleLines;
+        private List<SaleLine> saleLines = new List<SaleLine>();
         public decimal Tax { get; private set; }
         public decimal TotalValue { get; private set; }
         public TaxFreeProductRegistry Registry { get; private set; }
@@ -24,12 +24,19 @@ namespace SalesTax
         public bool Add(string inputLine)
         {
             SaleLine saleLine;
+            try
+            {
+                saleLine = InputParser.ProcessInput(inputLine);
+                saleLines.Add(saleLine);
+                Tax += saleLine.Tax;
+                TotalValue += saleLine.LineValue;
+                return true;
+            }
+            catch (Exception e) {
+                throw new Exception(e.Message);
+            }
 
-            saleLine = InputParser.ProcessInput(inputLine);
-            saleLines.Add(saleLine);
-            Tax += saleLine.Tax;
-            TotalValue += saleLine.LineValue;
-            return true;
+            return false;
         }
 
         /// <summary>

@@ -29,7 +29,7 @@ namespace SalesTax
             IsImported = itemIsImported;
             LineValue = Price * Quantity;
 
-            if (ProductName.Contains("book") || ProductName.Contains("tablet") || ProductName.Contains("chip"))
+            if (ProductName.Contains("book") || ProductName.Contains("tablet") || ProductName.Contains("tomatoes"))
                 taxRate = 0;  //No sales tax for books, medicals items or food
             else
                 taxRate = 10; //10% sales tax or general products
